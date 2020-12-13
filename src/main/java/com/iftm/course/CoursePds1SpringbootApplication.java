@@ -1,4 +1,4 @@
-package com.iftm.coursePDS1springboot;
+package com.iftm.course;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
