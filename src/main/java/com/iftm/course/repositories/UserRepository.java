@@ -1,4 +1,4 @@
-package com.iftm.course.repository;
+package com.iftm.course.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

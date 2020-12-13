@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.iftm.course.entities.User;
-import com.iftm.course.repository.UserRepository;
+import com.iftm.course.repositories.UserRepository;
 
 @Configuration
 @Profile("test")
