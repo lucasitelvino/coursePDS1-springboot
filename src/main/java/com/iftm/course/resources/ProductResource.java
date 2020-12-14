@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.iftm.course.entities.Product;
+import com.iftm.course.dto.ProductDto;
 import com.iftm.course.services.ProductService;
 
 @RestController
@@ -20,12 +20,12 @@ public class ProductResource {
 	private ProductService productService;
 	
 	@GetMapping
-	public 	ResponseEntity<List<Product>> findAll() {
+	public 	ResponseEntity<List<ProductDto>> findAll() {
 		return ResponseEntity.ok().body(productService.findAll());
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Product> findById(@PathVariable Long id){
+	public ResponseEntity<ProductDto> findById(@PathVariable Long id){
 		return ResponseEntity.ok().body(productService.findById(id));
 	}
 }
