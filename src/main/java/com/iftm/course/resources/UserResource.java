@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.iftm.course.dto.UserDto;
 import com.iftm.course.entities.User;
 import com.iftm.course.services.UserService;
 
@@ -26,12 +27,12 @@ public class UserResource {
 	private UserService userService;
 
 	@GetMapping
-	public ResponseEntity<List<User>> findAll() {
+	public ResponseEntity<List<UserDto>> findAll() {
 		return ResponseEntity.ok().body(userService.findAll());
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<User> findById(@PathVariable Long id) {
+	public ResponseEntity<UserDto> findById(@PathVariable Long id) {
 		return ResponseEntity.ok().body(userService.findById(id));
 	}
 

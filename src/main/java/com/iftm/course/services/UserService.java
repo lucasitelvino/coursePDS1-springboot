@@ -1,6 +1,7 @@
 package com.iftm.course.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -9,6 +10,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.iftm.course.dto.UserDto;
 import com.iftm.course.entities.User;
 import com.iftm.course.repositories.UserRepository;
 import com.iftm.course.services.exceptions.DatabaseException;
@@ -20,12 +22,12 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public List<User> findAll() {
-		return userRepository.findAll();
+	public List<UserDto> findAll() {
+		return userRepository.findAll().stream().map(user -> new UserDto(user)).collect(Collectors.toList());
 	}
 	
-	public User findById(Long id) {
-		return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+	public UserDto findById(Long id) {
+		return new UserDto(userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id)));
 	}
 	
 	public User insert(User obj) {
