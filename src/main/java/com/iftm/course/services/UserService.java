@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.iftm.course.dto.UserDto;
 import com.iftm.course.entities.User;
@@ -45,19 +46,20 @@ public class UserService {
 		
 	}
 	
-	public User update(Long id, User obj) {
+	@Transactional
+	public UserDto update(Long id, UserDto dto) {
 		try {
 			User entity = userRepository.getOne(id);
-			updateData(entity, obj);
-			return userRepository.save(entity);
+			updateData(entity, dto);
+			return new UserDto(userRepository.save(entity));
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException(id);
 		}
 	}
 
-	private void updateData(User entity, User obj) {
-		entity.setName(obj.getName());
-		entity.setEmail(obj.getEmail());
-		entity.setPhone(obj.getPhone());
+	private void updateData(User entity, UserDto dto) {
+		entity.setName(dto.getName());
+		entity.setEmail(dto.getEmail());
+		entity.setPhone(dto.getPhone());
 	}
 }
