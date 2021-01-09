@@ -2,6 +2,8 @@ package com.iftm.course.resources;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,7 +38,7 @@ public class UserResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<UserDto> insert(@RequestBody UserInsertDto dto) {
+	public ResponseEntity<UserDto> insert(@Valid @RequestBody UserInsertDto dto) {
 		return ResponseEntity
 				.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri())
 				.body(userService.insert(dto));
