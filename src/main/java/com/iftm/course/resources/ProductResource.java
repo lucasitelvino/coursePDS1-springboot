@@ -2,6 +2,8 @@ package com.iftm.course.resources;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,7 +38,7 @@ public class ProductResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<ProductDto> insert(@RequestBody ProductCategoriesDto dto) {
+	public ResponseEntity<ProductDto> insert(@Valid @RequestBody ProductCategoriesDto dto) {
 		ProductDto newDto = productService.insert(dto);
 		return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newDto.getId()).toUri())
 				.body(newDto);

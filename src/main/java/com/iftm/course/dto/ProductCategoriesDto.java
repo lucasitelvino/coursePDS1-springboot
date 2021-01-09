@@ -4,13 +4,25 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Positive;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.iftm.course.entities.Product;
 
 public class ProductCategoriesDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@NotEmpty(message = "can't be emply")
+	@Length(min = 3, max = 80)
 	private String name;
+	
+	@NotEmpty(message = "can't be emply")
+	@Length(min = 8)
 	private String description;
+	
+	@Positive(message = "Not negative value!")
 	private Double price;
 	private String imgUrl;
 	
