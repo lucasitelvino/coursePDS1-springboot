@@ -31,6 +31,7 @@ public class CategoryService {
 		return new CategoryDto(categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id)));
 	}
 
+	@Transactional
 	public CategoryDto insert(CategoryDto dto) {
 		return new CategoryDto(categoryRepository.save(dto.toEntity()));
 	}

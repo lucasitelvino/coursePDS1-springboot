@@ -32,6 +32,7 @@ public class UserService {
 		return new UserDto(userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id)));
 	}
 	
+	@Transactional
 	public UserDto insert(UserInsertDto dto) {
 		return new UserDto(userRepository.save(dto.toEntity()));
 	}

@@ -1,6 +1,5 @@
 package com.iftm.course.resources;
 
-import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.iftm.course.dto.UserDto;
 import com.iftm.course.dto.UserInsertDto;
-import com.iftm.course.entities.User;
 import com.iftm.course.services.UserService;
 
 @RestController
