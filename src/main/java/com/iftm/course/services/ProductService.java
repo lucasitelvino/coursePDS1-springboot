@@ -3,6 +3,8 @@ package com.iftm.course.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,5 +44,24 @@ public class ProductService {
 	private void setProductCategories(Product entity, List<CategoryDto> categories) {
 		entity.getCategories().clear();
 		for (CategoryDto dto : categories) entity.getCategories().add(categoryRepository.getOne(dto.getId()));
+	}
+	
+	@Transactional
+	public ProductDto update(Long id, ProductCategoriesDto dto) {
+		try {
+			Product entity = productRepository.getOne(id);
+			updateData(entity, dto);
+			return new ProductDto(productRepository.save(entity));
+		} catch(EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
+	}
+	
+	private void updateData(Product entity, ProductCategoriesDto dto) {
+		entity.setName(dto.getName());
+		entity.setDescription(dto.getDescription());
+		entity.setPrice(dto.getPrice());
+		entity.setImgUrl(dto.getImgUrl());
+		if (dto.getCategories() != null && dto.getCategories().size() > 0) setProductCategories(entity, dto.getCategories());
 	}
 }
